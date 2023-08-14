@@ -5,6 +5,8 @@ const config: WebSocketSubjectConfig<any> = {
 };
 export default class Orders {
   placeOrder() {
+    const timestamp = Date.now();
+
     const options = {
       startUpMessage: {
         d: {
@@ -13,7 +15,7 @@ export default class Orders {
           quantity: 1.3,
           price: 100.33,
           instrument: "INS1",
-          mpOrderId: 1001,
+          mpOrderId: timestamp,
           timeInForce: "GTC",
           userId: "UATUserTest10",
         },
@@ -23,6 +25,7 @@ export default class Orders {
     };
     cy.streamRequest(config, options).then((results) => {
       expect(results).to.not.be.undefined;
+      expect(results[0].d.errorMessage).to.eq("Invalid session");
       console.log(results);
     });
   }

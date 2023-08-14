@@ -16,6 +16,7 @@ async function httpPost(url: string, body: object) {
     headers: getHeaders(await getToken()),
   });
 }
+
 async function getToken(): Promise<string> {
   if (token) {
     return token;
@@ -40,14 +41,15 @@ function getHeaders(token: string) {
   };
 }
 
- async function createCalendar(): Promise<string> {
+async function createCalendar(): Promise<string> {
   const response = await httpPost(
     `${adminApiBaseUrl}/api/v2/calendars`,
     calendarData
   );
   return response.data.id;
 }
- async function createInstrument(): Promise<object> {
+
+async function createInstrument(): Promise<object> {
   const calendarId = await createCalendar();
   const response = await httpPost(
     `${adminApiBaseUrl}/api/v2/instruments`,
@@ -55,26 +57,27 @@ function getHeaders(token: string) {
   );
   return response.data;
 }
+
 export async function setupEntities() {
-  await createInstrument()
+  await createInstrument();
 }
+
 async function createMp(): Promise<string> {
   const response = await httpPost(`${adminApiBaseUrl}/api/mps`, mpData);
   return response.data.id;
 }
+
 export async function createMpApiKey(): Promise<{
+  apiKey: any;
+  secret: any;
   mpId: string;
-  secret: string;
-  apiKey: string;
+  label: string;
+  permissions: [];
 }> {
   const mp = await createMp();
   const response = await httpPost(
     `${adminApiBaseUrl}/api/mps/${mp}/api-keys`,
     mpApiKeyData
   );
-  return {
-    mpId: response.data.mpId,
-    secret: response.data.secret,
-    apiKey: response.data.apiKey,
-  };
+  return response.data;
 }

@@ -22,6 +22,9 @@ export default class Auth {
     const signature = this.getSignature(apiKey, secret, timestamp);
 
     const options = {
+      takeWhileFn: (message) => {
+        return message.sig !== 1;
+      },
       startUpMessage: {
         d: {
           apiKey: apiKey,

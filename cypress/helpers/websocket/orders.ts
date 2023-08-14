@@ -1,32 +1,27 @@
-import { WebSocketSubjectConfig } from "rxjs/webSocket";
+import { socket } from "../socket";
+import { orderData } from "./data";
 
-const config: WebSocketSubjectConfig<any> = {
-  url: "wss://sandbox-shared.staging.exberry-uat.io",
-};
 export default class Orders {
-  placeOrder() {
+  placeOrder(): Promise<{
+    d: { orderId: string; orderStatus: string };
+    q: string;
+    sid: number;
+  }> {
     const timestamp = Date.now();
-
-    const options = {
-      startUpMessage: {
-        d: {
-          orderType: "Limit",
-          side: "Buy",
-          quantity: 1.3,
-          price: 100.33,
-          instrument: "INS1",
-          mpOrderId: timestamp,
-          timeInForce: "GTC",
-          userId: "UATUserTest10",
-        },
-        q: "v1/exchange.market/placeOrder",
-        sid: 1,
-      },
-    };
-    cy.streamRequest(config, options).then((results) => {
-      expect(results).to.not.be.undefined;
-      expect(results[0].d.errorMessage).to.eq("Invalid session");
-      console.log(results);
+    const body = orderData(timestamp);
+    return new Promise((resolve, reject) => {
+      socket.send(JSON.stringify(body));
+      socket.on("data", function (message: string) {
+        let parsed;
+        try {
+          parsed = JSON.parse(message);
+        } catch (e) {
+          reject(e);
+        }
+        if (parsed?.d?.orderId) {
+          resolve(parsed);
+        }
+      });
     });
   }
 }

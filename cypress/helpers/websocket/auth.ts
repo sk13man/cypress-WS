@@ -1,9 +1,6 @@
 import sha256 from "crypto-js/hmac-sha256";
-import { WebSocketSubjectConfig } from "rxjs/webSocket";
-
-const config: WebSocketSubjectConfig<any> = {
-  url: "wss://sandbox-shared.staging.exberry-uat.io",
-};
+import { socket } from "../socket";
+import { loginData } from "./data";
 
 export default class Auth {
   private getSignature(
@@ -17,28 +14,18 @@ export default class Auth {
     ).toString();
   }
 
-  login(apiKey: string, secret: string) {
+  login(apiKey: string, secret: string): Promise<object> {
     const timestamp = Date.now();
     const signature = this.getSignature(apiKey, secret, timestamp);
+    const body = loginData(apiKey, signature, timestamp);
 
-    const options = {
-      takeWhileFn: (message) => {
-        return message.sig !== 1;
-      },
-      startUpMessage: {
-        d: {
-          apiKey: apiKey,
-          signature: signature,
-          timestamp: timestamp,
-        },
-        q: "exchange.market/createSession",
-        sid: 1,
-      },
-    };
-
-    cy.streamRequest(config, options).then((results) => {
-      expect(results).to.not.be.undefined;
-      console.log(results);
+    return new Promise((resolve, reject) => {
+      socket.send(JSON.stringify(body));
+      socket.on("data", function (message: string) {
+        if (JSON.parse(message)["sig"] === 1) {
+          resolve(JSON.parse(message));
+        }
+      });
     });
   }
 }

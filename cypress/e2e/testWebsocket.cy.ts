@@ -12,8 +12,14 @@ describe("Demo test suite", () => {
     apiKeyData = await createMpApiKey();
   });
 
-  it("Connect WS", () => {
-    auth.login(apiKeyData.apiKey, apiKeyData.secret);
-    orders.placeOrder();
+  it("Can create session", async () => {
+    const loginData = await auth.login(apiKeyData.apiKey, apiKeyData.secret);
+    expect(loginData).to.haveOwnProperty("sig", 1);
+  });
+
+  it("Place Order request returns orderId and orderStatus", async () => {
+    const orderData = await orders.placeOrder();
+    expect(orderData.d.orderId).to.be.an("number");
+    expect(orderData.d).to.haveOwnProperty("orderStatus", "Pending");
   });
 });

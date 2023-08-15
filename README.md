@@ -8,7 +8,7 @@
 
 # I have re-checked manually a lot of times - but still have the same result
 
-# Actually it is demo work and I don't really know product logic - so it is just for demonstrating my skills (I can finish if you show me how to do it manually)
+# Actually it is demo work - so it is just for demonstrating my skills (I can finish if you show me how to do it manually)
 
 # Also, I've spent a lot of time in attempting to use cypress plugin https://github.com/lensesio/cypress-websocket-testing
 

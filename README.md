@@ -15,15 +15,15 @@ The task was actually very interesting - so I'm looking forward to hear response
 
 Best wishes!
 
-# install dependencies
+### install dependencies
 
 npm install
 
-# to run tests with Cypress UI
+### to run tests with Cypress UI
 
 npm run cy:open
 
-# to run tests in headless
+### to run tests in headless
 
 npm run cy:open
 

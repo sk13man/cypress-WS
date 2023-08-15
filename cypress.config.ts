@@ -1,16 +1,15 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
+  defaultCommandTimeout: 5000,
   video: false,
   fixturesFolder: false,
   viewportWidth: 1920,
   viewportHeight: 1080,
   screenshotsFolder: "cypress/reports/screenshots",
-  screenshotOnRunFailure: true,
+  screenshotOnRunFailure: false,
 
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
+    setupNodeEvents(on, config) {},
   },
 });

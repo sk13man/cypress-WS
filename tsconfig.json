@@ -2,10 +2,22 @@
   "compilerOptions": {
     "module": "es6",
     "target": "es5",
-    "lib": ["ES2015", "DOM"],
+    "lib": [
+      "ES2015",
+      "DOM"
+    ],
     "strict": true,
     "noEmit": true,
-    "moduleResolution": "Node"
+    "noImplicitAny": false,
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "cypress",
+      "@lensesio/cypress-websocket-testing",
+      "node"
+    ]
   },
-  // only compile the production TS files
+  "include": [
+    "**/*.ts"
+  ]
 }

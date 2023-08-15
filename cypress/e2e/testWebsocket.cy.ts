@@ -43,8 +43,8 @@ describe("Demo test suite", () => {
         expect(report["d"]).to.haveOwnProperty("mpOrderId");
         expect(report["d"]).to.haveOwnProperty("userId", "UATUserTest1");
       });
-      const sellFiltered = reports.filter(report => report["d"].side == "Sell");
-      expect(sellFiltered.length).to.eq(2);
+      const sellReport = reports.find(report => report["d"].side == "Sell");
+      expect(sellReport["d"]).to.haveOwnProperty("timeInForce", "GTC");
     }
   );
 

@@ -4,7 +4,7 @@ import {
   createInstrumentsData,
   mpApiKeyData,
   mpData,
-} from "./data";
+} from "../../data/httpData";
 
 const adminApiBaseUrl = "https://admin-api-shared.staging.exberry-uat.io";
 const email = "qacandidate@gmail.com";

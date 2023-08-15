@@ -1,6 +1,6 @@
 import sha256 from "crypto-js/hmac-sha256";
 import { socket } from "../socket";
-import { loginData } from "./data";
+import { loginData } from "../../data/wsData";
 
 export default class Auth {
   private getSignature(

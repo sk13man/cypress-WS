@@ -1,22 +1,19 @@
 ## demo work
 
-# Dear colleagues!
+## Dear colleagues!
 
-# according to spec.feature - I should receive 2 messages from execution report - 2 MessageType : "Add" and 2 MessageType: "Executed"
+according to spec.feature - I should receive 2 messages from execution report - 2 MessageType : "Add" and 2
+MessageType: "Executed". But I have 1 "Add" and 3 "Executed".
+I have re-checked manually a lot of times - but still have the same result
+Actually it is demo work - so it is just for demonstrating my skills (I can finish if you show me how to do it manually)
 
-# but I have 1 "Add" and 3 "Executed".
+Also, I've spent a lot of time in attempting to use cypress plugin https://github.com/lensesio/cypress-websocket-testing
+It looks very outdated and seems that it can only listen to ws and send only one message on connect - so I've chosen a
+different one
 
-# I have re-checked manually a lot of times - but still have the same result
+The task was actually very interesting - so I'm looking forward to hear response from you!
 
-# Actually it is demo work - so it is just for demonstrating my skills (I can finish if you show me how to do it manually)
-
-# Also, I've spent a lot of time in attempting to use cypress plugin https://github.com/lensesio/cypress-websocket-testing
-
-# It looks very outdated and seems that it can only listen to ws and send only one message on connect - so I've chosen a different one
-
-# The task was actually very interesting - so I'm hearing response from you!
-
-# Best wishes!
+Best wishes!
 
 # install dependencies
 

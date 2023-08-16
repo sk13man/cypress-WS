@@ -2,7 +2,7 @@
 
 ## Dear colleagues!
 
-according to spec.feature - I should receive 2 messages from execution report - 2 MessageType : "Add" and 2
+According to spec.feature - I should receive 4 messages from execution report - 2 MessageType: "Add" and 2
 MessageType: "Executed". But I have 1 "Add" and 3 "Executed".
 I have re-checked manually a lot of times - but still have the same result
 Actually it is demo work - so it is just for demonstrating my skills (I can finish if you show me how to do it manually)
